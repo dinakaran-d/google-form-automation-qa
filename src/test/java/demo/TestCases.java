@@ -68,9 +68,13 @@ public class TestCases {
         optionMr.click();
         System.out.println("Step: 6-dropdown selected");
 
+        LocalDate currentDate = LocalDate.now();
+        LocalDate dateMinus7Days = currentDate.minusDays(7);
+        String formattedDate = dateMinus7Days.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
         WebElement dateSelect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@jscontroller='lLliLe']//input")));
-        dateSelect.sendKeys("27-01-2025");
-        System.out.println("Step: 7-Date selected");
+        dateSelect.sendKeys(formattedDate);
+        System.out.println("Step: 7-Date selected: " + formattedDate);
 
         WebElement HourField = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@aria-label='Hour']")));
         HourField.sendKeys("07");
