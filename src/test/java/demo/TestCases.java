@@ -1,7 +1,10 @@
 package demo;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.time.Duration;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -9,18 +12,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-// import io.github.bonigarcia.wdm.WebDriverManager;
 import demo.wrappers.Wrappers;
 
 public class TestCases {
@@ -34,44 +30,83 @@ public class TestCases {
    
 
     @Test
-    public void testCase01() {
+    public void testCase01() throws InterruptedException {
       
-        wrapper.navigateTo("https://docs.google.com/forms/d/e/1FAIpQLSep9LTMntH5YqIXa5nkiPKSs283kdwitBBhXWyZdAS-e4CxBQ/viewform");
-        System.out.println("Test case start-Step: 1-Navigation success");
+       
+        System.out.println("Test case start : TestCase01");
+        System.out.println("Step: 1-Navigated to google Form");
+        Thread.sleep(2000);
 
-        wrapper.sendKeys(By.xpath("//div[@class='Xb9hP']//child::input[@aria-describedby='i2 i3']"), "Crio Learner");
-        System.out.println("Step: 2-text filled");
 
-        long epochTime = wrapper.getCurrentEpochTime();
-        wrapper.sendKeys(By.xpath("//textarea[@aria-describedby='i7 i8']"), "I want to be the best QA Engineer! " + epochTime);
-        System.out.println("Step: 3-aim filled");
+        WebElement nameInputBox = driver.findElement(By.xpath("//div[contains(@class, 'k3kHxc')]//input"));
+        wrapper.enterText(nameInputBox, "Crio Learner");
+        System.out.println("Step: 2-text filled on name input box");
+        Thread.sleep(2000);
 
-        wrapper.click(By.xpath("//*[@id='i16']/div[3]/div"));
+        String epochTime = wrapper.getCurrentEpochTime();
+        WebElement practicingAutomationTextArea = driver.findElement(By.xpath("//textarea[contains(@class, 'tL9Q4c')]"));
+        String practicingAutomationText = "I want to be the best QA Engineer! ";
+        wrapper.enterText(practicingAutomationTextArea, practicingAutomationText  +" " +epochTime);
+        System.out.println("Step: 3-Practicing Automation text box filled");
+        Thread.sleep(2000);
+
+        List<WebElement> radioButtons = driver.findElements(By.xpath("   //div[@class='SG0AAe']//div[@class='nWQGrd zwllIb']//span[@dir='auto']"));
+        wrapper.radioButtonLoop(radioButtons, "0 - 2");
         System.out.println("Step: 4-radio button selected");
+        Thread.sleep(2000);
 
-        wrapper.click(By.xpath("//*[@id='i34']/child::div[2]")); //java
-        wrapper.click(By.xpath("//*[@id='i37']/child::div[2]")); //selenium
-        wrapper.click(By.xpath("//*[@id='i43']/child::div[2]")); //TestNg
+        List<WebElement> checkBoxes = driver.findElements(By.xpath("   //div[@aria-labelledby='i28 i31']//span[contains(@dir, 'auto')]"));
+        
+        wrapper.checkBox(checkBoxes, "Java" ); //java
+        wrapper.checkBox(checkBoxes, "Selenium" ); //selenium
+        wrapper.checkBox(checkBoxes, "TestNg" ); //TestNg
         System.out.println("Step: 5-Check boxes java, selenium, testNg selected");
+        Thread.sleep(2000);
 
-        wrapper.click(By.xpath("(//span[@class='vRMGwf oJeWuf'])[1]")); //dropdown
-        wrapper.click(By.xpath("(//div[@jsname='wQNmvb']//span[text()='Mr'])[2]")); //option Mr
-        System.out.println("Step: 6-dropdown selected");
 
-        wrapper.sendDate(By.xpath("//div[@jscontroller='lLliLe']//input"), "27-01-2025");
-        System.out.println("Step: 7-Date selected");
+        WebElement dropDownButton = driver.findElement(By.xpath("(//span[@class='vRMGwf oJeWuf'])[1]"));
+        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='vRMGwf oJeWuf'])[1]")));
 
-        wrapper.sendKeys(By.xpath("//input[@aria-label='Hour']"), "07");
-        wrapper.sendKeys(By.xpath("//input[@aria-label='Minute']"), "30");
+        wrapper.clickOnElement(dropDownButton);
+        Thread.sleep(2000);
+        
+        
+       List<WebElement> dropdownOptions = driver.findElements(By.xpath("//div[contains(@class,'ncFHed')]//span[not(contains(text(),'Choose'))]"));
+       Thread.sleep(2000); 
+       wrapper.dropDownClickLoop(dropdownOptions, "Mr"); //Mr
+       Thread.sleep(2000);
+
+       
+        System.out.println("Step: 6-dropdown clicked & option selected");
+        Thread.sleep(2000);
+
+        WebElement dateInputBox = driver.findElement(By.xpath("//div[@jscontroller='lLliLe']//input"));
+        String sevenDaysGoDate = wrapper.getdateSevenDaysAgo(7);
+        wrapper.enterText(dateInputBox, sevenDaysGoDate);
+        System.out.println("Step: 7-Date selected before 7 days");
+        Thread.sleep(2000);
+
+
+        WebElement hourElement = driver.findElement(By.xpath("//input[@aria-label='Hour']"));
+        WebElement minuteElement = driver.findElement(By.xpath("//input[@aria-label='Minute']"));
+        WebElement submitButton = driver.findElement(By.xpath("//*[@id='mG61Hd']/div[2]/div/div[3]/div[1]/div[1]/div/span"));
+        wrapper.enterText(hourElement, "07");
+        wrapper.enterText(minuteElement, "30");
         System.out.println("Step: 8-Time Selected");
-
-        wrapper.click(By.xpath("//*[@id='mG61Hd']/div[2]/div/div[3]/div[1]/div[1]/div/span"));
+        Thread.sleep(2000);
+        wrapper.clickOnElement(submitButton);
         System.out.println("Step: 9-Submit button clicked");
+        Thread.sleep(2000);
 
-        wrapper.waitAndPrintText(By.xpath("//div[@class='idZHHb']//div[text()='Thanks for your response, Automation Wizard!']"));
+        WebElement successMessageElement  = driver.findElement(By.xpath("//div[@class='vHW8K']"));
+        Thread.sleep(3000);
+        System.out.println(successMessageElement.getText());
         System.out.println("Test case end-Step: 10-Success message printed");
+        Thread.sleep(2000);
 
-
+        System.out.println("Test case end : TestCase01");
     }
 
 
@@ -100,6 +135,8 @@ public class TestCases {
         driver = new ChromeDriver(options);
         wrapper = new Wrappers(driver);
         driver.manage().window().maximize();
+        driver.get("https://docs.google.com/forms/d/e/1FAIpQLSep9LTMntH5YqIXa5nkiPKSs283kdwitBBhXWyZdAS-e4CxBQ/viewform");
+        
     }
    
 

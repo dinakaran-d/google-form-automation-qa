@@ -1,19 +1,16 @@
 package demo.wrappers;
 
+import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-
-import org.openqa.selenium.support.ui.ExpectedCondition;
 
 public class Wrappers {
     /*
@@ -27,38 +24,85 @@ public class Wrappers {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
-    public void navigateTo(String url) {
-        driver.get(url);
+    public void enterText(WebElement element, String text) {
+        try {
+            element.clear();
+            element.sendKeys(text);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public WebElement waitForElementClickable(By locator) {
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    public void radioButtonLoop(List<WebElement> elements, String radioButtonText) {
+        try {
+            for (WebElement element : elements) {
+                if (element.getText().equalsIgnoreCase(radioButtonText)) {
+                    element.click();
+                    break;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public  WebElement waitForElementVisible(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    public void checkBox(List<WebElement> elements, String checkBoxText) {
+        try {
+            for (WebElement element : elements) {
+                if (element.getText().equalsIgnoreCase(checkBoxText)) {
+                    element.click();
+                    break;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void sendKeys(By locator, String text) {
-        waitForElementClickable(locator).sendKeys(text);
-        System.out.println("Entered text in element: " + text);
+    public void dropDownClick(WebElement element) {
+        try {
+            element.click();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void click(By locator) {
-        waitForElementClickable(locator).click();
+    public void dropDownClickLoop(List<WebElement> elements, String dropDownText) {
+        try {
+            for (WebElement element : elements) {
+                if (element.getText().equals(dropDownText)) {
+                    JavascriptExecutor js = (JavascriptExecutor) driver;
+                    js.executeScript("arguments[0].click();", element);
+                    break;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void sendDate(By locator, String date) {
-        waitForElementClickable(locator).sendKeys(date);
-        System.out.println("Entered date: " + date);
+    public void clickOnElement(WebElement element) {
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();", element);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public long getCurrentEpochTime() {
-        return Instant.now().getEpochSecond();
+    public String getdateSevenDaysAgo(int days) {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate dateMinus7Days = currentDate.minusDays(days);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return dateMinus7Days.format(formatter);
     }
 
-    public void waitAndPrintText(By locator) {
-        WebElement element = waitForElementVisible(locator);
-        System.out.println(element.getText());
+    public String getCurrentEpochTime() {
+        long epochTime = System.currentTimeMillis() / 1000;
+        return String.valueOf(epochTime);
     }
+
 }

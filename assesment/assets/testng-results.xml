@@ -2,37 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-<<<<<<< HEAD
-  <suite started-at="2025-07-05T16:12:32 IST" name="Test Suite for Buildout" finished-at="2025-07-05T16:12:45 IST" duration-ms="13263">
+  <suite started-at="2025-07-08T03:25:11 IST" name="Test Suite for Buildout" finished-at="2025-07-08T03:25:53 IST" duration-ms="42344">
     <groups>
     </groups>
-    <test started-at="2025-07-05T16:12:32 IST" name="Test Cases for Buildout" finished-at="2025-07-05T16:12:45 IST" duration-ms="13263">
+    <test started-at="2025-07-08T03:25:11 IST" name="Test Cases for Buildout" finished-at="2025-07-08T03:25:53 IST" duration-ms="42344">
       <class name="demo.TestCases">
-        <test-method is-config="true" signature="startBrowser()[pri:0, instance:demo.TestCases@e19bb76]" started-at="2025-07-05T16:12:32 IST" name="startBrowser" finished-at="2025-07-05T16:12:36 IST" duration-ms="3842" status="PASS">
+        <test-method is-config="true" signature="startBrowser()[pri:0, instance:demo.TestCases@1a760689]" started-at="2025-07-08T03:25:11 IST" name="startBrowser" finished-at="2025-07-08T03:25:19 IST" duration-ms="7950" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startBrowser -->
-        <test-method signature="testCase01()[pri:0, instance:demo.TestCases@e19bb76]" started-at="2025-07-05T16:12:36 IST" name="testCase01" finished-at="2025-07-05T16:12:44 IST" duration-ms="8256" status="PASS">
+        <test-method signature="testCase01()[pri:0, instance:demo.TestCases@1a760689]" started-at="2025-07-08T03:25:19 IST" name="testCase01" finished-at="2025-07-08T03:25:52 IST" duration-ms="33387" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase01 -->
-        <test-method is-config="true" signature="endTest()[pri:0, instance:demo.TestCases@e19bb76]" started-at="2025-07-05T16:12:44 IST" name="endTest" finished-at="2025-07-05T16:12:45 IST" duration-ms="1092" status="PASS">
-=======
-  <suite started-at="2025-02-03T19:00:56Z" name="Test Suite for Buildout" finished-at="2025-02-03T19:01:13Z" duration-ms="16601">
-    <groups>
-    </groups>
-    <test started-at="2025-02-03T19:00:56Z" name="Test Cases for Buildout" finished-at="2025-02-03T19:01:13Z" duration-ms="16601">
-      <class name="demo.TestCases">
-        <test-method is-config="true" signature="startBrowser()[pri:0, instance:demo.TestCases@3fb6cf60]" started-at="2025-02-04T00:30:56Z" name="startBrowser" finished-at="2025-02-04T00:31:00Z" duration-ms="3849" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- startBrowser -->
-        <test-method signature="testCase01()[pri:0, instance:demo.TestCases@3fb6cf60]" started-at="2025-02-04T00:31:00Z" name="testCase01" finished-at="2025-02-04T00:31:11Z" duration-ms="11610" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testCase01 -->
-        <test-method is-config="true" signature="endTest()[pri:0, instance:demo.TestCases@3fb6cf60]" started-at="2025-02-04T00:31:11Z" name="endTest" finished-at="2025-02-04T00:31:13Z" duration-ms="1115" status="PASS">
->>>>>>> 13cfd516d47d7520db5dfea26f9257bc352479d2
+        <test-method is-config="true" signature="endTest()[pri:0, instance:demo.TestCases@1a760689]" started-at="2025-07-08T03:25:52 IST" name="endTest" finished-at="2025-07-08T03:25:53 IST" duration-ms="879" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- endTest -->
